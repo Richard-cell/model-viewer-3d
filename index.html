@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cube Viewer 3D</title>
+  <script type="module" crossorigin src="/cube-viewer-3d/assets/index-DdesRaKJ.js"></script>
+  <link rel="stylesheet" crossorigin href="/cube-viewer-3d/assets/index-CFfxw5Hw.css">
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header__logo">
+      <div class="header__logo-icon">⬡</div>
+      <span class="header__title">RICHARD - MODEL VIEWER</span>
+    </div>
+    <div class="header__meta">
+      <span class="badge">Three.js</span>
+      <span class="badge badge--accent">WebGL</span>
+    </div>
+  </header>
+
+  <!-- ── Layout ─────────────────────────────────────────────── -->
+  <div class="layout">
+
+    <!-- LEFT PANEL ──────────────────────────────────────────── -->
+    <aside class="panel">
+      <div class="panel__section">
+        <div class="panel-info">
+          <div class="info-block">
+            <div class="info-block__label">Interacción</div>
+            <div class="info-block__item">Drag para rotar</div>
+            <div class="info-block__item">Scroll para zoom</div>
+            <div class="info-block__item">Botones ← →</div>
+          </div>
+        </div>
+        <div class="panel-bottom">
+          <div class="status-text">
+            <span class="status-dot"></span>
+            Renderer activo
+          </div>
+        </div>
+      </div>
+      
+    </aside>
+
+    <!-- VIEWPORT ─────────────────────────────────────────────── -->
+    <main class="viewport-wrapper">
+      <div id="viewport"></div>
+
+      <div class="controls-bar">
+        <button
+          class="rotate-btn"
+          id="btn-left"
+          onmousedown="document.getElementById('btn-left').classList.add('pressing'); window.__rotCtrl?.startButtonRotation(-1)"
+          onmouseup="document.getElementById('btn-left').classList.remove('pressing'); window.__rotCtrl?.stopButtonRotation()"
+          onmouseleave="document.getElementById('btn-left').classList.remove('pressing'); window.__rotCtrl?.stopButtonRotation()"
+          ontouchstart="window.__rotCtrl?.startButtonRotation(-1)"
+          ontouchend="window.__rotCtrl?.stopButtonRotation()"
+        >
+          <svg viewBox="0 0 24 24">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          Izquierda
+        </button>
+
+       
+
+        <button
+          class="rotate-btn"
+          id="btn-right"
+          onmousedown="document.getElementById('btn-right').classList.add('pressing'); window.__rotCtrl?.startButtonRotation(1)"
+          onmouseup="document.getElementById('btn-right').classList.remove('pressing'); window.__rotCtrl?.stopButtonRotation()"
+          onmouseleave="document.getElementById('btn-right').classList.remove('pressing'); window.__rotCtrl?.stopButtonRotation()"
+          ontouchstart="window.__rotCtrl?.startButtonRotation(1)"
+          ontouchend="window.__rotCtrl?.stopButtonRotation()"
+        >
+          Derecha
+          <svg viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+      </div>
+    </main>
+
+    <!-- RIGHT PANEL ─────────────────────────────────────────── -->
+    <aside class="panel panel--right">
+      <!-- Textures section -->
+      <div class="panel__section">
+        <div class="panel__section-header">
+          <span class="panel__label">Texturas disponibles</span>
+          <!--<span class="panel__count">3 opciones</span>-->
+        </div>
+        <div id="panel-textures"></div>
+      </div>
+
+      <!-- Lighting section -->
+      <div class="panel__section">
+        <div class="panel__section-header">
+          <span class="panel__label">Iluminación disponible</span>
+          <!--<span class="panel__count">3 opciones</span>-->
+        </div>
+        <div id="panel-lights"></div>
+      </div>
+
+      <!-- Models section -->
+      <div class="panel__section">
+        <div class="panel__section-header">
+          <span class="panel__label">Modelos disponibles</span>
+          <!--<span class="panel__count">3 opciones</span>-->
+        </div>
+        <div id="panel-models"></div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- App entry point (ES Modules) -->
+</body>
+</html>
