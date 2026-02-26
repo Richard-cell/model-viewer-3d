@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let richardLoader = null
   try {
         richardLoader = new RichardModelLoader();
-        const mesh = await richardLoader.load('/cube-viewer-3d/Richard.glb');
+        const mesh = await richardLoader.load('/model-viewer-3d/Richard.glb');
         mesh.position.set(-3, -1.6, 0);
         mesh.scale.set(3, 3, 3);
         const target = new THREE.Vector3();
