@@ -6,7 +6,7 @@ Visor de modelos 3D interactivo desarrollado con **Three.js** y **Vite**, aplica
 
 ## 🚀 Demo en vivo
 
-[https://richard-cell.github.io/cube-viewer-3d/](https://richard-cell.github.io/cube-viewer-3d/)
+[https://richard-cell.github.io/cube-viewer-3d/](https://richard-cell.github.io/model-viewer-3d/)
 
 ---
 
