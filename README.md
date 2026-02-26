@@ -37,7 +37,7 @@ Visor de modelos 3D interactivo desarrollado con **Three.js** y **Vite**, aplica
 ```bash
 # Clonar el repositorio
 git clone https://github.com/richard-cell/model-viewer-3d.git
-cd cube-viewer-3d
+cd model-viewer-3d
 
 # Instalar dependencias
 npm install
