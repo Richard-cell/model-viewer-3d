@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────────────────────
-   Cube Viewer 3D — Stylesheet
+   Model Viewer 3D — Stylesheet
    Theme: Dark industrial / precision instrument
    Font: DM Mono + Barlow Condensed
 ───────────────────────────────────────────────────────────── */
@@ -120,14 +120,13 @@ html, body {
 .panel {
   background: var(--surface);
   border-right: 1px solid var(--border);
-  border-radius: 0%;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  overflow-y: scroll;
 }
+
 .panel::-webkit-scrollbar {
-  width: 14px;          /* ← aquí aumentas grosor vertical */
-  height: 14px;         /* ← para scroll horizontal */
+  width: 4px;
 }
 
 .panel--right {
@@ -203,7 +202,7 @@ html, body {
 .option-btn:hover::after { opacity: 0.03; }
 
 .option-btn.active {
-  border-color: rgba(255, 255, 255, 255);
+  border-color: rgba(255, 255, 255, 1);
   background: var(--accent-dim);
 }
 
@@ -261,7 +260,7 @@ html, body {
 
 .option-btn.active .opt-index { color: rgba(255, 255, 255, 0.5); }
 
-/* ── Panel Info (right) ─────────────────────────────────────── */
+/* ── Panel Info ─────────────────────────────────────────────── */
 .panel-info {
   padding: 20px 16px;
   display: flex;
@@ -312,7 +311,7 @@ html, body {
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  50%       { opacity: 0.4; }
 }
 
 .status-text {
@@ -334,7 +333,6 @@ html, body {
   overflow: hidden;
 }
 
-/* Subtle grid overlay */
 .viewport-wrapper::before {
   content: '';
   position: absolute;
@@ -347,7 +345,6 @@ html, body {
   z-index: 1;
 }
 
-/* Radial vignette */
 .viewport-wrapper::after {
   content: '';
   position: absolute;
@@ -464,10 +461,7 @@ html, body {
   to   { opacity: 1; transform: translateY(0);   }
 }
 
-.panel__section {
-  animation: fadeIn 0.4s ease both;
-}
-
+.panel__section { animation: fadeIn 0.4s ease both; }
 .panel__section:nth-child(1) { animation-delay: 0.05s; }
 .panel__section:nth-child(2) { animation-delay: 0.12s; }
 .panel__section:nth-child(3) { animation-delay: 0.19s; }
@@ -476,61 +470,76 @@ html, body {
 @media (max-width: 600px) {
 
   :root {
-    --panel-w:    100%;
     --header-h:   44px;
     --controls-h: 60px;
   }
 
-  /* Layout vertical: paneles arriba y abajo, viewport en medio */
   .layout {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
     height: calc(100vh - var(--header-h));
   }
 
-  /* Panel izquierdo arriba */
-  .panel {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-    overflow-x: auto;
-    overflow-y: hidden;
-    max-height: 140px;
-  }
-
-  /* Secciones del panel en fila horizontal */
-  .panel > .panel__section {
-    display: inline-flex;
-    flex-direction: column;
-    vertical-align: top;
-    min-width: 160px;
-    border-bottom: none;
-    border-right: 1px solid var(--border);
-  }
-
-  /* Panel derecho abajo */
+  .panel,
   .panel--right {
+    border-right: none;
     border-left: none;
-    border-top: 1px solid var(--border);
-    overflow-x: auto;
+    border-bottom: 1px solid var(--border);
+    border-top: none;
+    flex-direction: row;
+    overflow-x: scroll;
     overflow-y: hidden;
-    max-height: 140px;
+    height: 180px;
+    min-height: 180px;
+    max-height: 180px;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .panel--right > .panel__section {
-    display: inline-flex;
-    flex-direction: column;
-    vertical-align: top;
+  .panel--right {
+    border-bottom: none;
+    border-top: 1px solid var(--border);
+  }
+
+  .panel__section,
+  .panel--right .panel__section {
+    flex-shrink: 0;
+    width: 160px;
     min-width: 160px;
+    max-width: 160px;
+    height: 100%;
     border-bottom: none;
     border-right: 1px solid var(--border);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
 
-  /* Viewport ocupa el espacio restante */
+  #panel-textures,
+  #panel-lights,
+  #panel-models {
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .panel-info {
+    padding: 0;
+    gap: 8px;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .panel-bottom {
+    padding: 6px 0 0 0;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+  }
+
   .viewport-wrapper {
     min-height: 0;
+    overflow: hidden;
   }
 
-  /* Botones de rotación más compactos */
   .rotate-btn {
     padding: 8px 14px;
     font-size: 10px;
@@ -541,21 +550,14 @@ html, body {
     padding: 0 12px;
   }
 
-  /* Header más compacto */
   .header__title {
     font-size: 10px;
     letter-spacing: 0.1em;
   }
 
-  .header__meta {
-    gap: 8px;
-  }
-
-   /* Scrollbar más gruesa en mobile */
   .panel::-webkit-scrollbar,
   .panel--right::-webkit-scrollbar {
-    height: 6px;
-    width: 6px;
+    height: 4px;
   }
 
   .panel::-webkit-scrollbar-thumb,

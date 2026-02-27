@@ -63,7 +63,8 @@ export class SceneManager {
   #buildCamera() {
     const { clientWidth: w, clientHeight: h } = this.#container;
     this.#camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 100);
-    this.#camera.position.set(0, 1.2, 5);
+    const isMobile = w < 600;
+    this.#camera.position.set(0, 1.2, isMobile ? 9 : 5);
   }
 
   #buildRenderer() {
@@ -85,13 +86,17 @@ export class SceneManager {
   }
 
   #setupResize() {
-    const observer = new ResizeObserver(() => {
-      this.#setRendererSize();
-      const w = this.#container.clientWidth;
-      const h = this.#container.clientHeight;
-      this.#camera.aspect = w / h;
-      this.#camera.updateProjectionMatrix();
-    });
-    observer.observe(this.#container);
+    new ResizeObserver(() => {
+        const w = this.#container.clientWidth;
+        const h = this.#container.clientHeight;
+        this.#renderer.setSize(w, h, false);
+        this.#camera.aspect = w / h;
+        this.#camera.updateProjectionMatrix();
+
+        // Recalcula zoom según tamaño de pantalla
+        const isMobile = w < 600;
+        this.#camera.position.z = isMobile ? 9 : 5;
+
+    }).observe(this.#container);
   }
 }
