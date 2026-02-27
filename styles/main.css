@@ -471,3 +471,101 @@ html, body {
 .panel__section:nth-child(1) { animation-delay: 0.05s; }
 .panel__section:nth-child(2) { animation-delay: 0.12s; }
 .panel__section:nth-child(3) { animation-delay: 0.19s; }
+
+/* ── Responsive — Mobile Portrait ──────────────────────────── */
+@media (max-width: 600px) {
+
+  :root {
+    --panel-w:    100%;
+    --header-h:   44px;
+    --controls-h: 60px;
+  }
+
+  /* Layout vertical: paneles arriba y abajo, viewport en medio */
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    height: calc(100vh - var(--header-h));
+  }
+
+  /* Panel izquierdo arriba */
+  .panel {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-height: 140px;
+  }
+
+  /* Secciones del panel en fila horizontal */
+  .panel > .panel__section {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: top;
+    min-width: 160px;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+  }
+
+  /* Panel derecho abajo */
+  .panel--right {
+    border-left: none;
+    border-top: 1px solid var(--border);
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-height: 140px;
+  }
+
+  .panel--right > .panel__section {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: top;
+    min-width: 160px;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+  }
+
+  /* Viewport ocupa el espacio restante */
+  .viewport-wrapper {
+    min-height: 0;
+  }
+
+  /* Botones de rotación más compactos */
+  .rotate-btn {
+    padding: 8px 14px;
+    font-size: 10px;
+  }
+
+  .controls-bar {
+    gap: 12px;
+    padding: 0 12px;
+  }
+
+  /* Header más compacto */
+  .header__title {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+
+  .header__meta {
+    gap: 8px;
+  }
+
+   /* Scrollbar más gruesa en mobile */
+  .panel::-webkit-scrollbar,
+  .panel--right::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+
+  .panel::-webkit-scrollbar-thumb,
+  .panel--right::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 3px;
+  }
+
+  .panel::-webkit-scrollbar-track,
+  .panel--right::-webkit-scrollbar-track {
+    background: var(--surface-2);
+  }
+}
