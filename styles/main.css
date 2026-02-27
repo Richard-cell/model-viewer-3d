@@ -570,4 +570,28 @@ html, body {
   .panel--right::-webkit-scrollbar-track {
     background: var(--surface-2);
   }
+  /* Panel izquierdo ocupa todo el ancho si tiene una sola sección */
+  .panel > .panel__section:only-child {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  /* Padding al final para que el último botón sea visible */
+  #panel-textures,
+  #panel-lights,
+  #panel-models {
+    overflow-y: auto;
+    flex: 1;
+    padding-bottom: 8px;
+  }
+
+  /* Espacio extra al final del scroll horizontal */
+  .panel::after,
+  .panel--right::after {
+    content: '';
+    flex-shrink: 0;
+    width: 12px;
+    display: block;
+  }
 }

@@ -19,6 +19,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const sceneManager  = new SceneManager(document.getElementById('viewport'));
   const { scene, camera } = sceneManager;
+
+  window.addEventListener('resize', () => {
+      const isMobile = window.innerWidth < 600;
+      camera.position.z = isMobile ? 9 : 5;
+  });
+
   const timer = new THREE.Timer();
 
   const textureFactory = new TextureFactory();
@@ -77,11 +83,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   sceneManager.onAnimate(() => {
     timer.update();
     const delta = timer.getDelta();
-    richardLoader?.update(delta); 
-    
+
+    richardLoader?.update(delta);
+
     if (rotCtrl._zoomDelta) {
-      camera.position.z = Math.max(2.5, Math.min(9, camera.position.z + rotCtrl._zoomDelta));
-      rotCtrl._zoomDelta = 0;
+        const isMobile = window.innerWidth < 600;
+        const minZ = isMobile ? 6 : 3;
+        const maxZ = isMobile ? 12 : 8;
+        camera.position.z = Math.max(minZ, Math.min(maxZ, camera.position.z + rotCtrl._zoomDelta));
+        rotCtrl._zoomDelta = 0;
     }
     rotCtrl.rotate();
   });
