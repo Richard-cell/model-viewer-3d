@@ -70,8 +70,11 @@ export class SceneManager {
     this.#renderer = new THREE.WebGLRenderer({
       antialias: true,
       alpha: false,
+      powerPreference: 'high-performance',
     });
-    this.#renderer.setPixelRatio(window.devicePixelRatio);
+    this.#renderer.setPixelRatio(window.innerWidth < 600
+            ? Math.min(window.devicePixelRatio, 1.5) 
+            : window.devicePixelRatio);
     this.#renderer.shadowMap.enabled = true;
     this.#renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.#setRendererSize();
