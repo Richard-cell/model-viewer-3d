@@ -500,7 +500,7 @@ html, body {
     border-top: 1px solid var(--border);
   }
 
-  .panel__section,
+   .panel__section,
   .panel--right .panel__section {
     flex-shrink: 0;
     width: 160px;
@@ -513,6 +513,13 @@ html, body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+  }
+
+  /* ← Agrega esto nuevo */
+  .panel__section:last-child,
+  .panel--right .panel__section:last-child {
+    border-right: none;
+    margin-right: 16px;  /* ← espacio extra al final del scroll */
   }
 
   #panel-textures,
